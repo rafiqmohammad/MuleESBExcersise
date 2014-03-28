@@ -19,7 +19,6 @@ http://www.mulesoft.org/schema/mule/quartz http://www.mulesoft.org/schema/mule/q
 			</quartz:event-generator-job>
 		</quartz:inbound-endpoint>
 
-		<logger message="#[payload]" level="WARN" doc:name="Logger"/>
-		<logger message="#[message]" level="WARN" doc:name="Logger"/>
+		<logger message="#[payload],#[message]" level="WARN" doc:name="Logs current message and payload"/>
 	</flow>
 </mule>
