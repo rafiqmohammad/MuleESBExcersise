@@ -1,15 +1,7 @@
 [Purpose](#purpose)  
 [Prerequisites](#prerequisites)  
-[Initial setup of the Mule project](#initial-setup-of-the-mule-project)  
-* [Step 1: Install the Oracle EBS Financial connector from the update site](#step-1-install-the-oracle-ebs-financial-connector-from-the-update-site)  
-* [Step 2: Create a new Mule project](#step-2-create-a-new-mule-project)  
-* [Step 3: Store the credentials](#step-3-store-the-credentials)  
-* [Step 4: Create a Oracle EBS Global element](#step-4-create-a-oracle-ebs-global-element)
 [Building the demo](#building-the-demo)  
 * [Step 1: Building the "create" flow](#step-1-building-the-create-flow)   
-* [Step 2: Building the "get" flow](#step-2-building-the-get-flow)  
-* [Step 3: Building the "save" flow](#step-3-building-the-save-flow)  
-* [Step 4: Building the "update" flow](#step-4-building-the-update-flow)
 [Running the application](#running-the-application)  
 [Resources](#resources)
 
@@ -29,10 +21,11 @@ In order to run this project you'll need:
 Building the demo
 =================
 
-Document follows with the explainationon how to create the flow as per the usecase.
+Document follows with the explaination on how to create the flow as per the usecase.
+
 ### Step 1: Building the "create" flow
 
-1. Filter the Palette by "vm" and drag and drop an **VM Inbound Endpoint** in the canvas.  
+1. Filter the Palette by "vm" and drag and drop an **VM Inbound Endpoint** in the canvas.
 2.
 3. 
 
