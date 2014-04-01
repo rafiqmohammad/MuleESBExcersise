@@ -1,6 +1,6 @@
 package com.munit.test.commons;
 
-public class MockDataMapperResponse {
+public class DataMapperMockResponse {
 
 	/**This method is used accross other Unit-test cases. 
 	 * @return xml String

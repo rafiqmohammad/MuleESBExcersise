@@ -6,13 +6,13 @@ import org.junit.Test;
 import org.mule.api.MuleEvent;
 import org.mule.munit.runner.functional.FunctionalMunitSuite;
 
-import com.munit.test.commons.MockDataMapperResponse;
+import com.munit.test.commons.DataMapperMockResponse;
 
 /**
  * @author Mohammad rafiq
  *
  */
-public class MockDataMapperMunitTest extends FunctionalMunitSuite {
+public class DataMapperMunitMockingTest extends FunctionalMunitSuite {
 	
 	/*
 	 * @return xml file munitMockDataMapper for UnitTesting
@@ -25,10 +25,10 @@ public class MockDataMapperMunitTest extends FunctionalMunitSuite {
 	 * Test-case: assertNotNull of the flow 'munitTestDataMapperFlow'
 	 **/
 	@Test
-	public void testDMWithMock() throws Exception {
+	public void testDMByMocking() throws Exception {
 		
 		//getXMLPayload  serve a xml response  when DM component is mocked
-		String xmlPayload=MockDataMapperResponse.getXMLPayload();
+		String xmlPayload=DataMapperMockResponse.getXMLPayload();
 		
 		//mocing DM component
 		whenMessageProcessor("transform").ofNamespace("data-mapper").thenReturn(muleMessageWithPayload(xmlPayload));
