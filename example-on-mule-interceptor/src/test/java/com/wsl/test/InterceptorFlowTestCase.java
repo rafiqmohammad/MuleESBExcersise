@@ -26,6 +26,6 @@ public class InterceptorFlowTestCase extends FunctionalTestCase
     @Override
     protected String getConfigResources()
     {
-        return "ExampleOnMuleInterceptor.xml";
+        return "example-on-mule-interceptor.xml";
     }
 }
