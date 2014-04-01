@@ -22,17 +22,20 @@ public class DataMapperMunitMockingTest extends FunctionalMunitSuite {
 		return "munitMockDataMapper.xml";
 	}
 	/**
-	 * Test-case: assertNotNull of the flow 'munitTestDataMapperFlow'
+	 * Test-case: 
+	 * 1. mock DM component 
+	 * 2. then return mock xml response
+	 * 3. and assertNotNull
 	 **/
 	@Test
 	public void testDMByMocking() throws Exception {
 		
-		//getXMLPayload  serve a xml response  when DM component is mocked
+		//getXMLPayload  serve a xml response.
 		String xmlPayload=DataMapperMockResponse.getXMLPayload();
 		
-		//mocing DM component
+		//mocking DM component
 		whenMessageProcessor("transform").ofNamespace("data-mapper").thenReturn(muleMessageWithPayload(xmlPayload));
-		
+		//invoke the flow
 		MuleEvent response = runFlow("munitMockDataMapperFlow",testEvent("mock message"));
 		//check for response payload NotNull
 		assertNotNull(response.getMessageAsString());
