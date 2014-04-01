@@ -12,7 +12,7 @@ import com.munit.test.commons.MockDataMapperResponse;
  * @author Mohammad rafiq
  *
  */
-public class MockDataMapperMunitTetCase_1 extends FunctionalMunitSuite {
+public class MockDataMapperMunitTest extends FunctionalMunitSuite {
 	
 	/*
 	 * @return xml file munitMockDataMapper for UnitTesting
@@ -25,7 +25,7 @@ public class MockDataMapperMunitTetCase_1 extends FunctionalMunitSuite {
 	 * Test-case: assertNotNull of the flow 'munitTestDataMapperFlow'
 	 **/
 	@Test
-	public void mockDMTest() throws Exception {
+	public void testDMWithMock() throws Exception {
 		
 		//getXMLPayload  serve a xml response  when DM component is mocked
 		String xmlPayload=MockDataMapperResponse.getXMLPayload();

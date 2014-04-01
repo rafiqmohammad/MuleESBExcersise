@@ -17,6 +17,5 @@ Test the application
 =======================
 
 1. Navigate to src/test/java folder
-2. Right click on **MockDataMapperMunitTetCase_1.java** and select **Run As JUnit Test**.
+2. Right click on **MockDataMapperMunitTest.java** and select **Run As JUnit Test**.
 3. Switchover to JUnit wundow to see the output.
-![Junit window](images/image002.png)
