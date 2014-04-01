@@ -5,7 +5,7 @@
 Purpose
 ===========
 
-This document illustrates the concept of **Mule Context Notification** with a basic usecase.
+This document illustrates the concept of **Mule Context Notification** with a basic use-case.
 
 
 **Use-case**: Trigger the flow(s) automatically when the mule context has been started using **MuleContextNotificationListener** interface
@@ -14,7 +14,7 @@ Running the application
 =======================
 
 1. Right click on MuleContextNotificationExample.mflow and select **Run As Mule Application**.
-2. Check the console to see ouuput when the application starts.
+2. Check the console to see output when the application starts.
 
 	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	+ Started app 'example-mule-context-notification'          +
