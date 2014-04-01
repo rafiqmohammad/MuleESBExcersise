@@ -5,13 +5,17 @@ Purpose
 ===========
 
 This document illustrates the concept of **Mocking Data-Mapper** with a basic usecase. Mocking is achieved using MUnit Framework.
+
+
 **Use-case**: Trigger the flow with HTTP Inbound endpoint and transform current payload to xml using **Data-Mapper(mock)**.
+
+
 
 
 **include .grf files to classpath**
 
-	While mocking Data-mapper all the ".grf" files should available to class path. So, right click on **mappings** folder
-	hover on 'Build Path' and select **Use as Source Folder** option.
+	While mocking Data-mapper all the ".grf" files should available to class path. So, right click on "mappings" folder
+	hover on 'Build Path' and select "Use as Source Folder" option.
 
 Test the application
 =======================
