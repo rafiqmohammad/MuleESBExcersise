@@ -5,23 +5,18 @@ Purpose
 ===========
 
 This document illustrates the concept of **Mocking Data-Mapper** with a basic usecase. Mocking is achieved using MUnit Framework.
-Use-case: Transform payload to xml using Data-Mapper(mock).
+**Use-case**: Transform payload to xml using Data-Mapper(mock).
 
 
-Adding 'mappings' folder to Source Path
+include .grf files to classpath
 =================
 
-Steps follows with the explaination on how to add **mappings** folder
-
-### Step 1: Add Datamapper to Source Path
-1. Right click on mappings folder.
-2. Hover on 'Build Path' 
-3. Select 'Use as Source Folder' option.
+While mocking Data-mapper all the ".grf" files should available to class path. So, right click on **mappings** folder, hover on 'Build Path' and select **Use as Source Folder** option.
 
 Test the application
 =======================
 
 1. Navigate to src/test/java folder
-2. Right click on MockDataMapperMunitTetCase_1.java and select **Run As JUnit Test**.
+2. Right click on **MockDataMapperMunitTetCase_1.java** and select **Run As JUnit Test**.
 3. Switchover to JUnit wundow to see the output.
 ![Junit window](images/image002.png)
