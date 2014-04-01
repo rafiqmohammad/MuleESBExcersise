@@ -1,5 +1,4 @@
 package com.wsl;
-import org.apache.log4j.PropertyConfigurator;
 import org.mule.api.MuleEvent;
 import org.mule.api.MuleException;
 import org.mule.api.interceptor.Interceptor;
@@ -13,7 +12,7 @@ public class MyCustomInterceptor extends AbstractInterceptingMessageProcessor im
     @Override
     public MuleEvent process(MuleEvent event) throws MuleException
     {
-    	PropertyConfigurator.configure("./config/log4j.properties");
+    	//PropertyConfigurator.configure("./config/log4j.properties");
     	String payload = (String)event.getMessage().getPayload();
     	CreateLoggerInstance.log.info(":::in process: payload before tweek:::::::"+event.getMessage().getPayload().toString()+"::::::::::");
     	event.getMessage().setPayload(payload + "!");
