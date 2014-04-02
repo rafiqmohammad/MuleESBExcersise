@@ -1,5 +1,5 @@
 [Purpose](#purpose)  
-[Project Description](#project-description)  
+[Project Description](#description)  
 [Procedure to Mock DB Endpoint](#procedure-to-mock-db-endpoint)  
 [Test the application](#test-the-application)  
 
@@ -64,4 +64,4 @@ Test the application
 	* Right click on the Junit Test case and run as Junit Test case.
 	* Open the Junit console and see the test results.
 
-For more understanding can refer the attached 'munit-mock-db' sample code.
+For more understanding can refer the attached 'munit-mock-http' sample code.
