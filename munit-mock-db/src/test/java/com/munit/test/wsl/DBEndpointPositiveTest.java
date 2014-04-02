@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.mule.api.MuleEvent;
 import org.mule.munit.runner.functional.FunctionalMunitSuite;
 
-public class DBEndpointNegativeTestCase1 extends FunctionalMunitSuite {
+public class DBEndpointPositiveTest extends FunctionalMunitSuite {
 
 	/**
 	 *  
@@ -46,14 +46,13 @@ public class DBEndpointNegativeTestCase1 extends FunctionalMunitSuite {
 	 * TestCase: should mock DB outbound-endpoint, 
 	 * When mocked it should return payload from method jdbcPayload() 
 	 * i.e [{COLUMN2=row1, COLUMN1=1}, {COLUMN2=row2, COLUMN1=2}]
-	 * 
-	 * Check for assert not same for class java.util.ArrayList
 	 */
 	@Test
-	public void testforDBNegativeTestCase1() throws Exception {
+	public void testforDBPositiveTestCase1() throws Exception {
 		whenEndpointWithAddress("jdbc://selectQ").thenReturn( muleMessageWithPayload( jdbcPayload() ) );
 		MuleEvent resultEvent = runFlow("munit-db-mockFlow",testEvent("Hello world!"));
-		System.out.println(resultEvent.getMessage().getPayload().getClass().toString());
-		assertNotSame("class java.util.HashMap;", resultEvent.getMessage().getPayload().getClass().toString());
+		System.out.println(jdbcPayload().toString());
+		assertEquals(jdbcPayload().toString(), resultEvent.getMessage().getPayloadAsString());
+		
 	}
 }
