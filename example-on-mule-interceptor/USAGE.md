@@ -33,7 +33,7 @@ Running the application
 
 		**!** is added at end of the payload by the Class 'MyCustomInterceptor'
 
-6. You would also see the below log - due to <timer-interceptor/>
+6. You would also see the below log - due to timer-interceptor
 
 		interceptorFlow took 18ms to process event [0-287071b8-ba29-11e3-8eed-0d942f57ad4d]
 
@@ -41,10 +41,10 @@ Running the application
 Resources
 ===========
 
-    ● [Using Interceptors] (http://www.mulesoft.org/documentation/display/current/Using+Interceptors)
-	
-    ● [What are Interceptors?] (http://ricston.com/blog/interceptors/)
-	
-	● [Example on Interceptor Flow Test Case] (https://gist.github.com/cmordue/4552292)
+● [Using Interceptors] (http://www.mulesoft.org/documentation/display/current/Using+Interceptors)
+
+● [What are Interceptors?] (http://ricston.com/blog/interceptors/)
+
+● [Example on Interceptor Flow Test Case] (https://gist.github.com/cmordue/4552292)
 	
 
