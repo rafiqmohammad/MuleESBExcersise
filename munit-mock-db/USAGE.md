@@ -11,17 +11,6 @@ This document illustrates the concept of **Mocking** and **Unit-Testing** of **D
 
 **Use-case**: Instead of reading records from the actual Database, **mock DB-endpoint** and do **Unit-Testing**.
 
-Unit Testing and Mocking
-================================================
-
-● Create a Junit Test case under src/test/java folder and name of the test class should end with Test.
-● Import the munit related packages into test class.
-● Configure the getresourceconfiguration method by pointing to configuration file.
-● Create test method which is used to invoke the flow.Pass the flow name as input parameter.
-● Create test methods which covers the possitve,negative and null payload use case.
-
-
-
 
 
 Procedure to Mock DB Endpoint
@@ -37,6 +26,20 @@ Example:
 		whenEndpointWithAddress("jdbc://selectQ").thenReturn( muleMessageWithPayload( jdbcPayload() ) );
 
 		
+Unit Testing and Mocking
+================================================
+
+	● Create a Junit Test case under src/test/java folder and name of the test class should end with Test.
+
+	● Import the munit related packages into test class.
+
+	● Configure the getresourceconfiguration method by pointing to configuration file.
+
+	● Create test method which is used to invoke the flow.Pass the flow name as input parameter.
+
+	● Create test methods which covers the possitve,negative and null payload use case.
+
+
 Test the application
 ==================
 	* Right click on the Junit Test case and run as Junit Test case.
