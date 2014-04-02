@@ -27,25 +27,22 @@ Running the application
 	and based on the action **MuleContextNotification.CONTEXT_STARTED** automatically flow are getting invoked.
 
 		MuleCustomContextNotification:33 - --------MuleCustomContextNotification------------------
-		
 		MuleCustomContextNotification:34 - getAction 104, MuleContextNotification.CONTEXT_STARTED 104
-		
 		MuleCustomContextNotification:35 - getActionName mule context started
-		
 		MuleCustomContextNotification:36 - getType info
-		
 		MuleCustomContextNotification:37 - getClass class org.mule.context.notification.MuleContextNotification
-		
 		MuleCustomContextNotification:38 - getSource rafiqoffice-pc..example-mule-context-notification
-		
 		MuleCustomContextNotification:39 - EVENT_NAME MuleContextNotification
-		
 		MuleCustomContextNotification:40 - --------------------------
-		
 		MuleCustomContextNotification:41 - ::::::notificationArrayL.size::::::::::::2::::::::::::::::::
-		
 		MuleCustomContextNotification:59 - :::::::::::::::::::::mule context started:::::::::::::::::::::
-		
 		AbstractLifecycleManager:197 - Initialising: 'connector.VM.mule.default.dispatcher.694395027'. Object is: VMMessageDispatcher
-		
 		AbstractLifecycleManager:197 - Starting: 'connector.VM.mule.default.dispatcher.694395027'. Object is: VMMessageDispatcher
+
+Resources
+===========
+
+●     [Mule Server Notifications] (http://www.mulesoft.org/documentation/display/current/Mule+Server+Notifications)
+●     [System notifications Mule] (http://ricston.com/blog/system-notifications-mule/)
+●     [Server Notification Listener Interface] (http://ricston.com/blog/servernotificationlistener-interface/)
+●     [Listening Notifications] (http://ricston.com/blog/listening-notifications/)
