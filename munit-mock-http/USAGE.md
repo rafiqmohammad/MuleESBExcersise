@@ -1,7 +1,8 @@
-[Purpose](#purpose)
-[Project Description](#project-description)
-[Procedure to Mock DB Endpoint](#Procedure-to-Mock-DB-Endpoint)
+[Purpose](#purpose)  
+[Project Description](#project-description)  
+[Procedure to Mock DB Endpoint](#procedure-to-mock-db-endpoint)  
 [Test the application](#test-the-application)  
+
 
 Purpose
 ===========
@@ -11,22 +12,24 @@ Mocking is achieved using MUnit Framework.
 
 **Use-case**: Instead of obtain response from REST or SOAP web-service(s), **mock Http-endpoint** and do **Unit-Testing**.
 
-Project Description
+Description
 ========================
 
-**munit-mock-http** project includes following Mflows:
+Project named **munit-mock-http**, includes two Mflows as below
 
 ● munitMockHTTP-REST.mflow
+
 ● munitMockHTTP-SOAP.mflow
 
-**munitMockHTTP-REST.mflow** includes following flows
+**munitMockHTTP-REST.mflow**, includes following flows
 
-1. **munit-http-RestConsumer**: Starts with HTTP inbound-endpoint and followed with Http outbound-endpoint(**pointing to Rest Webservice**) expecting JSON response.
-2. **munit-http-Rest-XML-Consumer**: Starts with HTTP inbound-endpoint and followed with Http outbound-endpoint(**pointing to Rest Webservice**) expecting XML response.
+	1. **munit-http-RestConsumer**: Starts with HTTP inbound-endpoint and followed with Http outbound-endpoint(**pointing to Rest Webservice**) expecting JSON response.
 
-**munitMockHTTP-SOAP.mflow** includes following flows
+	2. **munit-http-Rest-XML-Consumer**: Starts with HTTP inbound-endpoint and followed with Http outbound-endpoint(**pointing to Rest Webservice**) expecting XML response.
 
-1. **munit-http-SoapConsumer**: Starts with HTTP inbound-endpoint and followed with Http outbound-endpoint(**pointing to SOAP Webservice**).
+**munitMockHTTP-SOAP.mflow**, includes following flows
+
+	1. **munit-http-SoapConsumer**: Starts with HTTP inbound-endpoint and followed with Http outbound-endpoint(**pointing to SOAP Webservice**).
 
 
 Procedure to Mock DB Endpoint
