@@ -9,6 +9,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 
     <flow name="interceptorFlow" doc:name="interceptorFlow">
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="muleInterceptor" doc:name="HTTP"/>
+        <expression-filter expression="#[payload !='favicon.ico']" doc:name="Expression to stop 'favicon.ico' pass thru the flow"/>
 
         <custom-interceptor class="com.wsl.MyCustomInterceptor"/>
         <timer-interceptor></timer-interceptor>
