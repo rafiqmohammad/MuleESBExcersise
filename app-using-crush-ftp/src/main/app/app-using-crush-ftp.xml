@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:sftp="http://www.mulesoft.org/schema/mule/sftp" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sftp/current/mule-sftp.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+	<sftp:connector name="SFTPConnector"
+		validateConnections="true" doc:name="SFTP" />
+	<flow name="app-using-crush-ftpFlow1" doc:name="app-using-crush-ftpFlow1" doc:description="Need to read files from CrushFtp Server and should put those into 'src/test/resources/out' folder">
+		<sftp:inbound-endpoint host="localhost" port="2222"
+			responseTimeout="10000" doc:name="SFTP" 
+			password="password" user="crushuser1" path="/in" connector-ref="SFTPConnector"/>
+		<logger message="#[payload]" level="INFO" doc:name="Logger" />
+        <file:outbound-endpoint path="src/test/resources/out" responseTimeout="10000" doc:name="File" outputPattern="#[header:originalFilename]_#[function:dateStamp(yyyyMMddHHmmssSSS].txt"/>
+	</flow>
+</mule>
