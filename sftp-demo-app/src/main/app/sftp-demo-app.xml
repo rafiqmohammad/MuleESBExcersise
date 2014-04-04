@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:sftp="http://www.mulesoft.org/schema/mule/sftp" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sftp/current/mule-sftp.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+    <sftp:connector name="SFTPConnector" validateConnections="false" doc:name="SFTP" pollingFrequency="60000">
+		<receiver-threading-profile maxThreadsActive="1" maxBufferSize="10" maxThreadsIdle="1" threadTTL="600000" poolExhaustedAction="WAIT" threadWaitTimeout="10000" />
+		<service-overrides messageReceiver="org.mule.transport.sftp.CustomSftpMessageReceiver"  />
+    </sftp:connector>
+    
+    <spring:beans>
+    	<spring:bean name="MuleCustomContextNotificationBean" class="com.wsl.mulenotifications.MuleCustomContextNotificationBean"/>
+    	<spring:bean name="MuleCustomServerNotificationBean" class="com.wsl.mulenotifications.MuleCustomServerNotificationBean"/>
+    	<spring:bean name="MuleCustomRoutingNotificationBean" class="com.wsl.mulenotifications.MuleCustomRoutingNotificationBean"/>
+    	<spring:bean name="RemoteDispatcherNotificationBean" class="com.wsl.mulenotifications.RemoteDispatcherNotificationBean"/>
+    	<spring:bean name="MuleConnectionNotificationBean" class="com.wsl.mulenotifications.MuleConnectionNotificationBean"/>
+    	
+    </spring:beans>
+    <notifications>
+    	<notification-listener ref="MuleCustomRoutingNotificationBean"/>
+    	<notification-listener ref="MuleCustomServerNotificationBean"/>
+    	<notification-listener ref="MuleCustomContextNotificationBean"/>
+    	<notification-listener ref="RemoteDispatcherNotificationBean"/>
+    	<notification-listener ref="MuleConnectionNotificationBean"/>
+    </notifications>
+    <flow name="sftp-demo-appFlow1" doc:name="sftp-demo-appFlow1">
+        <sftp:inbound-endpoint host="localhost" port="2222" path="/in" user="crushuser1" password="password" responseTimeout="10000" connector-ref="SFTPConnector" doc:name="SFTP-inbound" archiveDir="/ach"/>
+        <logger message="From SFTP::::::#[payload]::::::::" level="INFO" doc:name="Logs results from SFTP"/>
+        <collection-splitter doc:name="Collection Splitter"/>
+        <byte-array-to-string-transformer doc:name="Byte Array to String"/>
+        <choice doc:name="Choice">
+            <when expression="">
+                <vm:outbound-endpoint exchange-pattern="request-response" path="q" doc:name="VM"/>
+            </when>
+            <otherwise>
+                <flow-ref name="sftp-demo-appFlow2" doc:name="Flow Reference"/>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="sftp-demo-appFlow2" doc:name="sftp-demo-appFlow2">
+        <logger message=":::::#[payload]::::" level="INFO" doc:name="Logger"/>
+        <file:outbound-endpoint path="src/test/resources/outputFiles" responseTimeout="10000" doc:name="File-outbound"/>
+    </flow>
+    <flow name="sftp-demo-appFlow3" doc:name="sftp-demo-appFlow3">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="q" doc:name="VM"/>
+        <logger message="from 2 vm" level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>
