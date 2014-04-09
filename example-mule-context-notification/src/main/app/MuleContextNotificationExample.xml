@@ -17,11 +17,14 @@ http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/cu
 	</spring:beans>
 
 	<notifications>
+		<!-- <notification event="CONTEXT"/> -->
 		<notification-listener ref="MuleCustomContextNotificationBean" />
 	</notifications>
 	
 	<flow name="MuleContextNotificationExampleFlowVM" doc:name="MuleContextNotificationExampleFlowVM">
-        <vm:inbound-endpoint exchange-pattern="one-way" path="vmQFlow1" doc:name="VM-vmQFlow1"/>
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="testNotifications" doc:name="HTTP"/>
+        <!-- <vm:inbound-endpoint exchange-pattern="one-way" path="vmQFlow1" doc:name="VM-vmQFlow1"/> -->
         <logger message="From flow: #[flow.name], Current Payload:#[payload]" level="INFO" doc:name="Logs payload"/>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="vmQFlow1" doc:name="VM-vmQFlow1"/>
 	</flow>
 </mule>
