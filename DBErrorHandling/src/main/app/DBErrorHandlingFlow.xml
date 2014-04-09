@@ -26,25 +26,7 @@ http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sft
 	</jdbc-ee:connector>
 
 
-	<!--Global element SFTPConnector with custom messageReceiver -->
-	<sftp:connector name="SFTPConnector"
-		validateConnections="true" doc:name="SFTP" pollingFrequency="15000">
-        
-        <!-- <spring:property name="url" value="http://localhost:2222"/> -->
-		<!-- <reconnect-forever/> -->
-		<receiver-threading-profile
-			maxThreadsActive="1" maxBufferSize="10" maxThreadsIdle="1" threadTTL="600000"
-			poolExhaustedAction="WAIT" threadWaitTimeout="10000" />
-		<service-overrides messageReceiver="org.mule.transport.sftp.CustomSftpMessageReceiver" />
-	</sftp:connector>
-
-	<sftp:connector name="SFTPConnector1"
-		validateConnections="true" doc:name="SFTP" />
-
-
-
-
-
+	
 	<flow name="DBErrorHandlingFlow" doc:name="DBErrorHandlingFlow"
 		processingStrategy="synchronous">
 		<http:inbound-endpoint exchange-pattern="request-response"
@@ -121,25 +103,6 @@ http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sft
 			message=":::::::::::::::::::::::::::::::::::::From #[flow.name]:::::::::::::::::::::::::::::::::::::::"
 			level="INFO" doc:name="Logs flow name" />
 	</flow>
-	<!-- <flow name="DBErrorHandlingFlowFlow1" doc:name="DBErrorHandlingFlowFlow1"> 
-		<sftp:inbound-endpoint host="localhost" port="2222" responseTimeout="10000" 
-		doc:name="SFTP" connector-ref="SFTPConnector" password="password" path="/in" 
-		user="crushuser1" archiveDir="sftp:localhost:2222/in/inarch"/> <component 
-		class="org.mule.transport.sftp.SFTPMessageReceiverDecompressor" doc:name="Java 
-		Component " /> <foreach doc:name="For Each"> <logger message="#[payload]" 
-		level="INFO" doc:name="Logger" /> </foreach> <choice-exception-strategy doc:name="Choice 
-		Exception Strategy"> <catch-exception-strategy when="#[exception.causedBy(org.mule.api.MuleRuntimeException)]" 
-		doc:name="Catch Exception Strategy"> <logger message="#[flow.name] in IOException 
-		block #[exception.getMessage()] ::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::" 
-		level="INFO" doc:name="Logs Exception"/> </catch-exception-strategy> <catch-exception-strategy 
-		when="#[exception.causedBy(java.io.IOException)]" doc:name="Catch Exception 
-		Strategy"> <logger message="#[flow.name] in IOException block #[exception.getMessage()] 
-		::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::" 
-		level="INFO" doc:name="Logs Exception"/> </catch-exception-strategy> <catch-exception-strategy 
-		enableNotifications="false" doc:name="Catch Exception Strategy"> <logger 
-		message="#[flow.name] in Default Exception block #[exception.getMessage()] 
-		::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::" 
-		level="INFO" doc:name="Logs Exception"/> </catch-exception-strategy> </choice-exception-strategy> 
-		</flow> -->
+	
 </mule>
 
