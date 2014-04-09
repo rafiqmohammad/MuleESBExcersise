@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd">
+    <jdbc-ee:oracle-data-source name="Oracle_Data_Source" user="wsldb" password="wsldb" url="jdbc:oracle:thin:@//localhost:1521/XE" transactionIsolation="UNSPECIFIED" doc:name="Oracle Data Source"/>
+    <jdbc-ee:connector name="DatabaseConnector" dataSource-ref="Oracle_Data_Source" validateConnections="true" queryTimeout="-1" pollingFrequency="0" doc:name="Database">
+        <reconnect/>
+    </jdbc-ee:connector>
+    <flow name="testora10gconnectionFlow1" doc:name="testora10gconnectionFlow1">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="HTTP" path="testOracle10gDBCon"/>
+        <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="selectQ" queryTimeout="-1" connector-ref="DatabaseConnector" doc:name="Database">
+            <jdbc-ee:query key="selectQ" value="select * from table1"/>
+        </jdbc-ee:outbound-endpoint>
+        <logger message="#[payload]" level="INFO" doc:name="Logs payload"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+    </flow>
+</mule>
