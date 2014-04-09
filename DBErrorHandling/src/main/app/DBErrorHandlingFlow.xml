@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:sftp="http://www.mulesoft.org/schema/mule/sftp"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/sftp http://www.mulesoft.org/schema/mule/sftp/current/mule-sftp.xsd">
+
+	<!--Global element Oracle_Data_Source -->
+	<jdbc-ee:oracle-data-source name="Oracle_Data_Source"
+		user="wsldb" password="wsldb" url="jdbc:oracle:thin:@//localhost:1521/XE"
+		transactionIsolation="UNSPECIFIED" doc:name="Oracle Data Source" />
+
+	<!--Global element Oracle_DatabaseConnector -->
+	<jdbc-ee:connector name="DatabaseConnector"
+		dataSource-ref="Oracle_Data_Source" validateConnections="true"
+		queryTimeout="2" pollingFrequency="0" doc:name="Database">
+		<reconnect-forever frequency="15000" />
+	</jdbc-ee:connector>
+
+
+	<!--Global element SFTPConnector with custom messageReceiver -->
+	<sftp:connector name="SFTPConnector"
+		validateConnections="true" doc:name="SFTP" pollingFrequency="15000">
+        
+        <!-- <spring:property name="url" value="http://localhost:2222"/> -->
+		<!-- <reconnect-forever/> -->
+		<receiver-threading-profile
+			maxThreadsActive="1" maxBufferSize="10" maxThreadsIdle="1" threadTTL="600000"
+			poolExhaustedAction="WAIT" threadWaitTimeout="10000" />
+		<service-overrides messageReceiver="org.mule.transport.sftp.CustomSftpMessageReceiver" />
+	</sftp:connector>
+
+	<sftp:connector name="SFTPConnector1"
+		validateConnections="true" doc:name="SFTP" />
+
+
+
+
+
+	<flow name="DBErrorHandlingFlow" doc:name="DBErrorHandlingFlow"
+		processingStrategy="synchronous">
+		<http:inbound-endpoint exchange-pattern="request-response"
+			host="localhost" port="8081" path="testErrorHandling" doc:name="HTTP" />
+		<logger message="Delay= #[message.inboundProperties['delay']]"
+			level="INFO" doc:name="Logger" />
+		<!-- <sftp:inbound-endpoint responseTimeout="10000" doc:name="SFTP" connector-ref="SFTPConnector" 
+			archiveDir="./ach"/> -->
+		<jdbc-ee:outbound-endpoint exchange-pattern="request-response"
+			queryKey="wrongQ" queryTimeout="-1" connector-ref="DatabaseConnector"
+			doc:name="Database">
+			<jdbc-ee:query key="selectQ" value="select * from table1" />
+			<jdbc-ee:query key="callSP"
+				value="call dummyproc(#['rafiq';string;in],#[mules;string;out])" />
+			<jdbc-ee:query key="callspSLEEP"
+				value="call SLEEP(#[message.inboundProperties['delay'];string;in],#[mules;string;out])" />
+			<jdbc-ee:query key="wrongQ" value="select * from wrongTable" />
+		</jdbc-ee:outbound-endpoint>
+
+		<logger message="#[message]" level="INFO" doc:name="Logs payload" />
+		<object-to-string-transformer doc:name="Object to String" />
+		<logger message="Payload::::#[payload]:::" level="INFO"
+			doc:name="Logger" />
+		<choice-exception-strategy doc:name="Choice Exception Strategy">
+			<catch-exception-strategy
+				when="#[exception.causedBy(java.sql.SQLException)]" doc:name="Catch Exception Strategy"
+				enableNotifications="false">
+				<logger
+					message="#[flow.name]:::: in SQLException block :::#[exception.getCause().getMessage()]:::"
+					level="INFO" doc:name="Logs Exception cause(message)" />
+
+				<choice doc:name="Choice">
+					<when
+						expression="#[exception.getCause().getMessage().toString().contains('Cannot get connection')]">
+						<flow-ref name="DBErrorHandlingUnableToConnectFlow"
+							doc:name="moving to UnableToConnectFlow" />
+					</when>
+					<when
+						expression="#[exception.getCause().getMessage().toString().contains('ORA-01013')]">
+						<flow-ref name="DBErrorHandlingResponseTimeOutFlow"
+							doc:name="moving to ResponseTimeOutFlow" />
+					</when>
+					<otherwise>
+						<logger
+							message="in Exceptional block default choice :::#[exception.getCause().getMessage()]:::"
+							level="INFO" doc:name="Logs exception cause message" />
+					</otherwise>
+				</choice>
+			</catch-exception-strategy>
+			<catch-exception-strategy
+				when="#[exception.causedBy(java.io.IOException)]" doc:name="Catch Exception Strategy"
+				enableNotifications="false">
+				<logger
+					message="in IOException block  ::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::"
+					level="INFO" doc:name="Logs Exception cause" />
+			</catch-exception-strategy>
+			<catch-exception-strategy doc:name="Catch Exception Strategy"
+				enableNotifications="false">
+				<logger
+					message="in Default Exception block::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::"
+					level="INFO" doc:name="Logs Exception cause" />
+			</catch-exception-strategy>
+		</choice-exception-strategy>
+	</flow>
+	<flow name="DBErrorHandlingResponseTimeOutFlow" doc:name="DBErrorHandlingResponseTimeOutFlow"
+		processingStrategy="synchronous">
+		<logger
+			message="&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;From #[flow.name]&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;"
+			level="INFO" doc:name="Logs flow name" />
+	</flow>
+	<flow name="DBErrorHandlingUnableToConnectFlow" doc:name="DBErrorHandlingUnableToConnectFlow"
+		processingStrategy="synchronous">
+		<logger
+			message=":::::::::::::::::::::::::::::::::::::From #[flow.name]:::::::::::::::::::::::::::::::::::::::"
+			level="INFO" doc:name="Logs flow name" />
+	</flow>
+	<!-- <flow name="DBErrorHandlingFlowFlow1" doc:name="DBErrorHandlingFlowFlow1"> 
+		<sftp:inbound-endpoint host="localhost" port="2222" responseTimeout="10000" 
+		doc:name="SFTP" connector-ref="SFTPConnector" password="password" path="/in" 
+		user="crushuser1" archiveDir="sftp:localhost:2222/in/inarch"/> <component 
+		class="org.mule.transport.sftp.SFTPMessageReceiverDecompressor" doc:name="Java 
+		Component " /> <foreach doc:name="For Each"> <logger message="#[payload]" 
+		level="INFO" doc:name="Logger" /> </foreach> <choice-exception-strategy doc:name="Choice 
+		Exception Strategy"> <catch-exception-strategy when="#[exception.causedBy(org.mule.api.MuleRuntimeException)]" 
+		doc:name="Catch Exception Strategy"> <logger message="#[flow.name] in IOException 
+		block #[exception.getMessage()] ::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::" 
+		level="INFO" doc:name="Logs Exception"/> </catch-exception-strategy> <catch-exception-strategy 
+		when="#[exception.causedBy(java.io.IOException)]" doc:name="Catch Exception 
+		Strategy"> <logger message="#[flow.name] in IOException block #[exception.getMessage()] 
+		::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::" 
+		level="INFO" doc:name="Logs Exception"/> </catch-exception-strategy> <catch-exception-strategy 
+		enableNotifications="false" doc:name="Catch Exception Strategy"> <logger 
+		message="#[flow.name] in Default Exception block #[exception.getMessage()] 
+		::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::" 
+		level="INFO" doc:name="Logs Exception"/> </catch-exception-strategy> </choice-exception-strategy> 
+		</flow> -->
+</mule>
+
