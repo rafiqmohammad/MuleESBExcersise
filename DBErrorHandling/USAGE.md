@@ -95,5 +95,5 @@ Running the application
 Resources
 ===========
 
-● [Using Interceptors] (http://www.mulesoft.org/documentation/display/current/Using+Interceptors)
+● [Using Interceptors] (http://www.mulesoft.org/documentation/display/current/Using+Interceptors).
 ● [Oracle sproc for testing] (http://ourcraft.wordpress.com/2013/04/11/how-to-put-a-delay-in-an-oracle-sproc-for-testing/)
