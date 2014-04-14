@@ -40,10 +40,10 @@ C:\>sqlplus sys@clayoracle3 as sysdba <br />
 ... <br />
 SQL> GRANT EXECUTE ON dbms_lock TO WSLDB; <br />
 
-2. writing a Store Procedure to sleep <br />
+2. Writing a Store Procedure to sleep <br />
 	Functionality:  <br />
 	Read for no. of seconds from input to which DB should execute sleep method  <br />
-	and ends up in returing a OUT String as 'SLEEP for \<no. of seconds\> seconds seconds'.<br />
+	and ends up in returing a OUT String as 'SLEEP for \<no. of seconds\> seconds'.<br />
 
 	CREATE OR REPLACE PROCEDURE SLEEP(seconds IN VARCHAR2, returnStr OUT VARCHAR2) <br />
 	IS <br />
@@ -66,18 +66,6 @@ SQL> GRANT EXECUTE ON dbms_lock TO WSLDB; <br />
 	Statement processed. <br />
 	3.93 seconds <br />
 
-### Test for 'Response time out' Exception
-Change SQL Statement under JDBC Connector Query Key to 'callspSLEEP'.
-Note: In this case one will not be able to push content save via SFTP/File connectors.
-
-### Test for 'Unable to connect' Exception
-Pull down Oracle DB and hit a request via browser.
-
-### Test for 'IO Exception' Exception
-1. Pull down SFTP Server and hit a request via browser.
-2. Make usre DB is up and running.
-
-
 Running the application
 =======================
 
@@ -90,6 +78,32 @@ Running the application
 	
 3. Hit the endpoint at<http://localhost:8081/testErrorHandling?delay=5>.
 	
+
+
+### Test for 'Unable to connect' Exception
+1. Change SQL Statement under JDBC Connector Query Key to 'selectQ'.<br />
+2. Pull down Oracle DB and hit a request via browser.<br />
+**output**:<br />
+DBErrorHandlingFlow:::: in SQLException block :::Cannot get connection for URL jdbc:oracle:thin:@//localhost:1521/XE : Io exception: The Network Adapter could not establish the connection (java.sql.SQLException):::<br />
+This line indicates that Exception 'UnableToConnect' raised !  And you are in flow DBErrorHandlingUnableToConnectFlow <br />
+
+### Test for 'Response time out' Exception
+
+Change SQL Statement under JDBC Connector Query Key to 'callspSLEEP'.
+**Note**:<br />
+	1. Connector is set QuertTimeout for 3 Seconds.<br />
+	2. In this case, one will not be able to push content save via SFTP/File connectors.<br />
+**output**:<br />
+DBErrorHandlingFlow:::: in SQLException block :::ORA-01013: user requested cancel of current operation <br />
+: This line indicates that Exception 'ResponseTimeOut' raised !  And you are in flow DBErrorHandlingResponseTimeOutFlow <br />
+
+### Test for 'IO Exception' Exception
+1. Pull down SFTP Server and hit a request via browser.<br />
+2. Make usre DB is up and running.<br />
+**output**:<br />
+in IOException block  ::::::::::::::::::Error during login to crushuser2@localhost: java.net.ConnectException: Connection refused: connect:::::<br />
+This line indicates that SFTP IO Exception raised !  And you are in flow DBErrorHandlingFlow1<br />
+Writing file to: F:\crushrootfolder\crushuser2\err\20142314160418<br />
 	
 Resources
 ===========

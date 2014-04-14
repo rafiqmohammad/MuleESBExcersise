@@ -49,7 +49,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 		<!-- <sftp:inbound-endpoint responseTimeout="10000" doc:name="SFTP" connector-ref="SFTPConnector" 
 			archiveDir="./ach"/> -->
 		<jdbc-ee:outbound-endpoint exchange-pattern="request-response"
-			queryKey="callspSLEEP" queryTimeout="2" connector-ref="DatabaseConnector"
+			queryKey="selectQ" queryTimeout="2" connector-ref="DatabaseConnector"
 			doc:name="Database">
 			<jdbc-ee:query key="selectQ" value="select * from table1" />
 			<jdbc-ee:query key="callSP"
