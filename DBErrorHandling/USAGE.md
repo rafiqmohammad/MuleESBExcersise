@@ -33,24 +33,52 @@ In order to build and run this project you'll need:
 * A browser to make a request to your Mule application.
 
 
+	### Oracle Store Procedure	to delay the response.
 
-### Test for 'Response time out' Exception
+1. First you’ll need to give your user EXECUTE permissions on the dbms_lock module: <br />
+C:\>sqlplus sys@clayoracle3 as sysdba <br />
+... <br />
+SQL> GRANT EXECUTE ON dbms_lock TO WSLDB; <br />
 
+2. writing a Store Procedure to sleep
+--Functionality:  <br />
+	--Read for no. of seconds from input to which DB should execute sleep method. <br />
+	--and ends up in returing a OUT String as ''SLEEP for <no. of seconds> seconds'.<br />
 
+	CREATE OR REPLACE PROCEDURE SLEEP(seconds IN VARCHAR2, returnStr OUT VARCHAR2) <br />
+	IS <br />
+	BEGIN <br />
+	  dbms_lock.sleep(TO_NUMBER(seconds)); <br />
+	  DBMS_OUTPUT.PUT_LINE('SLEEP for '|| seconds  || 'seconds '); <br />
+	  returnStr := 'SLEEP for '||seconds || 'seconds' ; <br />
+	END; <br />
+
+	3. Execution of SP uing SQL Plus after it is created using command. <br />
+	DECLARE <br />
+		inParam1 INTEGER:='3'; <br />
+		returnStr VARCHAR2(255); <br />
+	BEGIN <br />
+	   <br />
+	  SLEEP(inParam1,returnStr ); <br />
+	   <br />
+	END; <br />
+4. SP Output would be.  <br />
+	SLEEP for 3 seconds  <br />
+	 <br />
+	Statement processed. <br />
+	 <br />
+	3.93 seconds <br />
+
+	### Test for 'Response time out' Exception
 1. Change SQL Statement under JDBC Connector Query Key to 'callspSLEEP'.
 
-
-### Test for 'Unable to connect' Exception
-
-
+	### Test for 'Unable to connect' Exception
 1. Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
-
 
 ### Test for 'IO Exception' Exception
-
 1. Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
- 
-  
+
+
 Running the application
 =======================
 
@@ -63,50 +91,6 @@ Running the application
 	
 3. Hit the endpoint at<http://localhost:8081/testErrorHandling>.
 	
-
-### Oracle Store Procedure	to delay the response.
-
-
-1. First you’ll need to give your user EXECUTE permissions on the dbms_lock module:
-
-C:\>sqlplus sys@clayoracle3 as sysdba
-...
-SQL> GRANT EXECUTE ON dbms_lock TO WSLDB;
-
-2. writing a Store Procedure to sleep
-
---Functionality: 
-	--Read for no. of seconds from input to which DB should execute sleep method.
-	--and ends up in returing a OUT String as ''SLEEP for <no. of seconds> seconds'.
-
-CREATE OR REPLACE PROCEDURE SLEEP(seconds IN VARCHAR2, returnStr OUT VARCHAR2)
-IS 
-BEGIN
-  dbms_lock.sleep(TO_NUMBER(seconds));
-  DBMS_OUTPUT.PUT_LINE('SLEEP for '|| seconds  || 'seconds ');
-  returnStr := 'SLEEP for '||seconds || 'seconds' ;
-  
-END;
-
-
-3. Execution of SP uing SQL Plus after it is created using command
-
-DECLARE
-    inParam1 INTEGER:='3';
-    returnStr VARCHAR2(255);
-BEGIN
-  
-  SLEEP(inParam1,returnStr );
-  
-END;
-
-4. SP Output would be 
-
-SLEEP for 3 seconds 
-
-Statement processed.
-
-3.93 seconds
 	
 Resources
 ===========
