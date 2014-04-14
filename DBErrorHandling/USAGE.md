@@ -34,20 +34,19 @@ In order to build and run this project you'll need:
 
 
 
-Test for 'Response time out' Exception
-=======================
+### Test for 'Response time out' Exception
+
 
 1. Change SQL Statement under JDBC Connector Query Key to 'callspSLEEP'.
 
 
-Test for 'Unable to connect' Exception
-=======================
+### Test for 'Unable to connect' Exception
+
 
 1. Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
 
 
-Test for 'IO Exception' Exception
-=======================
+### Test for 'IO Exception' Exception
 
 1. Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
  
@@ -65,8 +64,8 @@ Running the application
 3. Hit the endpoint at<http://localhost:8081/testErrorHandling>.
 	
 
-Oracle Store Procedure	to delay the response.
-=================================
+### Oracle Store Procedure	to delay the response.
+
 
 1. First you’ll need to give your user EXECUTE permissions on the dbms_lock module:
 
