@@ -27,7 +27,7 @@ Prerequisites
 In order to build and run this project you'll need:  
 
 * To download and install [MuleStudio Community edition](http://www.mulesoft.org/download-mule-esb-community-edition).
-* To download and install [Crushftp Server] (http://www.crushftp.com/download.html) and have a User 'crushuser1'. 
+* To download and install [Crushftp Server] (http://www.crushftp.com/download.html) and have a User 'crushuser2'. 
 * To download and install [Oracle Database] (http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)  and create a User 'WSLDB'.
 * User EXECUTE Permissions on the dbms_lock module.
 * A Store Procedure 'SLEEP'.
@@ -89,7 +89,7 @@ This line indicates that Exception 'UnableToConnect' raised !  And you are in fl
 
 ### Test for 'Response time out' Exception
 
-Change SQL Statement under JDBC Connector Query Key to 'callspSLEEP'.
+1. Change SQL Statement under JDBC Connector Query Key to 'callspSLEEP'.<br />
 **Note**:<br />
 	1. Connector is set QuertTimeout for 3 Seconds.<br />
 	2. In this case, one will not be able to push content save via SFTP/File connectors.<br />
