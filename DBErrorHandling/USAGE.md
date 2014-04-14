@@ -83,7 +83,7 @@ Running the application
 ### Test for 'Unable to connect' Exception
 1. Change SQL Statement under JDBC Connector Query Key to 'selectQ'.<br />
 2. Pull down Oracle DB and hit a request via browser.<br />
-**output**:<br />
+**Output**:<br />
 DBErrorHandlingFlow:::: in SQLException block :::Cannot get connection for URL jdbc:oracle:thin:@//localhost:1521/XE : Io exception: The Network Adapter could not establish the connection (java.sql.SQLException):::<br />
 This line indicates that Exception 'UnableToConnect' raised !  And you are in flow DBErrorHandlingUnableToConnectFlow <br />
 
@@ -93,14 +93,14 @@ This line indicates that Exception 'UnableToConnect' raised !  And you are in fl
 **Note**:<br />
 	1. Connector is set QuertTimeout for 3 Seconds.<br />
 	2. In this case, one will not be able to push content save via SFTP/File connectors.<br />
-**output**:<br />
+**Output**:<br />
 DBErrorHandlingFlow:::: in SQLException block :::ORA-01013: user requested cancel of current operation <br />
 : This line indicates that Exception 'ResponseTimeOut' raised !  And you are in flow DBErrorHandlingResponseTimeOutFlow <br />
 
 ### Test for 'IO Exception' Exception
 1. Pull down SFTP Server and hit a request via browser.<br />
 2. Make usre DB is up and running.<br />
-**output**:<br />
+**Output**:<br />
 in IOException block  ::::::::::::::::::Error during login to crushuser2@localhost: java.net.ConnectException: Connection refused: connect:::::<br />
 This line indicates that SFTP IO Exception raised !  And you are in flow DBErrorHandlingFlow1<br />
 Writing file to: F:\crushrootfolder\crushuser2\err\20142314160418<br />
