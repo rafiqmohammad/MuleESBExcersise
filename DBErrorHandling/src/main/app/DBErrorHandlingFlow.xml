@@ -49,7 +49,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 		<!-- <sftp:inbound-endpoint responseTimeout="10000" doc:name="SFTP" connector-ref="SFTPConnector" 
 			archiveDir="./ach"/> -->
 		<jdbc-ee:outbound-endpoint exchange-pattern="request-response"
-			queryKey="selectQ" queryTimeout="-1" connector-ref="DatabaseConnector"
+			queryKey="callspSLEEP" queryTimeout="2" connector-ref="DatabaseConnector"
 			doc:name="Database">
 			<jdbc-ee:query key="selectQ" value="select * from table1" />
 			<jdbc-ee:query key="callSP"
@@ -59,6 +59,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 			<jdbc-ee:query key="wrongQ" value="select * from wrongTable" />
 			<jdbc-ee:query key="callSumIT" value="call sumint" />
 		</jdbc-ee:outbound-endpoint>
+        <logger message="Response from DB:#[payload]:" level="INFO" doc:name="Logs Response from DB"/>
         <collection-splitter doc:name="Collection Splitter"/>
 		<object-to-string-transformer doc:name="Object to String" />
 		<logger message="Payload::::#[payload]:::" level="INFO"

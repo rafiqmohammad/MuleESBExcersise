@@ -32,18 +32,17 @@ In order to build and run this project you'll need:
 * User EXECUTE Permissions on the dbms_lock module
 * A browser to make a request to your Mule application.
 
-
-	### Oracle Store Procedure	to delay the response.
+### Oracle Store Procedure	to delay the response.
 
 1. First you’ll need to give your user EXECUTE permissions on the dbms_lock module: <br />
 C:\>sqlplus sys@clayoracle3 as sysdba <br />
 ... <br />
 SQL> GRANT EXECUTE ON dbms_lock TO WSLDB; <br />
 
-2. writing a Store Procedure to sleep
---Functionality:  <br />
-	--Read for no. of seconds from input to which DB should execute sleep method. <br />
-	--and ends up in returing a OUT String as ''SLEEP for <no. of seconds> seconds'.<br />
+2. writing a Store Procedure to sleep <br />
+	Functionality:  <br />
+	Read for no. of seconds from input to which DB should execute sleep method  <br />
+	and ends up in returing a OUT String as 'SLEEP for \<no. of seconds\> seconds seconds'.<br />
 
 	CREATE OR REPLACE PROCEDURE SLEEP(seconds IN VARCHAR2, returnStr OUT VARCHAR2) <br />
 	IS <br />
@@ -53,30 +52,27 @@ SQL> GRANT EXECUTE ON dbms_lock TO WSLDB; <br />
 	  returnStr := 'SLEEP for '||seconds || 'seconds' ; <br />
 	END; <br />
 
-	3. Execution of SP uing SQL Plus after it is created using command. <br />
+3. Execution of SP uing SQL Plus after it is created. <br />
 	DECLARE <br />
 		inParam1 INTEGER:='3'; <br />
 		returnStr VARCHAR2(255); <br />
 	BEGIN <br />
-	   <br />
-	  SLEEP(inParam1,returnStr ); <br />
-	   <br />
+		SLEEP(inParam1,returnStr ); <br />
 	END; <br />
 4. SP Output would be.  <br />
+	
 	SLEEP for 3 seconds  <br />
-	 <br />
 	Statement processed. <br />
-	 <br />
 	3.93 seconds <br />
 
-	### Test for 'Response time out' Exception
-1. Change SQL Statement under JDBC Connector Query Key to 'callspSLEEP'.
-
-	### Test for 'Unable to connect' Exception
-1. Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
+### Test for 'Response time out' Exception
+Change SQL Statement under JDBC Connector Query Key to 'callspSLEEP'.
+Note: in case of this exception you will not be able to push content
+### Test for 'Unable to connect' Exception
+Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
 
 ### Test for 'IO Exception' Exception
-1. Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
+Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
 
 
 Running the application
@@ -95,5 +91,5 @@ Running the application
 Resources
 ===========
 
-● [Using Interceptors] (http://www.mulesoft.org/documentation/display/current/Using+Interceptors).
+● [Using Interceptors] (http://www.mulesoft.org/documentation/display/current/Using+Interceptors). <br />
 ● [Oracle sproc for testing] (http://ourcraft.wordpress.com/2013/04/11/how-to-put-a-delay-in-an-oracle-sproc-for-testing/)
