@@ -14,10 +14,10 @@ This document illustrates the usecase built for exception handling for **DB Outb
 Build an example app which is 
 
 1. Get records from Database and put them in SFTP server.
-2. Should be able to handle DB-outbound SQL Exceptions **Response time out**.
-3. Should be able to handle DB-outbound SQL Exceptions **Unable to connect**.
-4. Should be to  handle **IO Exception** in case of SFTP is not up/running and save the contents via File Connector in error folder.
-5. In case of any exceptions then console them with following details using 'Exception Notifications Listener'.
+2. Should be able to handle DB-outbound SQL Exceptions **Response time out** in case of delay in response. Cut off time 3 sec
+3. Should be able to handle DB-outbound SQL Exceptions **Unable to connect** in case of DB not up/running.
+4. Should be able to handle **IO Exceptions** in case of SFTP is not up/running and save the contents via File Connector in error folder.
+5. In case of any exceptions,console them with following details using **Exception Notifications Listener**.
   <br />Exception Notification with: Action name, Type, Class, Source.
 
 
@@ -27,13 +27,13 @@ Prerequisites
 In order to build and run this project you'll need:  
 
 * To download and install [MuleStudio Community edition](http://www.mulesoft.org/download-mule-esb-community-edition).
-* A browser to make a request to your Mule application. 
-* SFTP Server with a user id 'crushuser1' and up/running.
-* An Oracle Database with user id 'WSLDB' and up/running.
+* To download and install [Crushftp Server] (http://www.crushftp.com/download.html) and have a User 'crushuser1'. 
+* To download and install [Oracle Database] (http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html)  and create a User 'WSLDB'.
 * User EXECUTE Permissions on the dbms_lock module.
 * A Store Procedure 'SLEEP'.
+* A browser to make a request to your Mule application. 
 
-### Oracle Store Procedure	to delay the response.
+### Oracle Store Procedure SLEEP.
 
 1. First you’ll need to give your user EXECUTE permissions on the dbms_lock module: <br />
 C:\>sqlplus sys@clayoracle3 as sysdba <br />
@@ -94,6 +94,4 @@ Running the application
 Resources
 ===========
 
-● [Using Interceptors] (http://www.mulesoft.org/documentation/display/current/Using+Interceptors). <br />
 ● [Oracle sproc for testing] (http://ourcraft.wordpress.com/2013/04/11/how-to-put-a-delay-in-an-oracle-sproc-for-testing) <br />
-● [Crushftp Server] (http://www.crushftp.com/download.html)<br />
