@@ -32,7 +32,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 		</spring:bean>
 	</spring:beans>
 	<notifications>
-		<!-- <notification event="CONTEXT"/> -->
+		<notification event="EXCEPTION"/>
 		<notification-listener ref="CustomExceptionNotification" />
 	</notifications>
 
@@ -68,7 +68,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 		<choice-exception-strategy doc:name="Choice Exception Strategy">
 			<catch-exception-strategy
 				when="#[exception.causedBy(java.sql.SQLException)]" doc:name="Catch Exception Strategy"
-				enableNotifications="false">
+				>
 				<logger
 					message="#[flow.name]:::: in SQLException block :::#[exception.getCause().getMessage()]:::"
 					level="INFO" doc:name="Logs Exception cause(message)" />
@@ -93,14 +93,14 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 			</catch-exception-strategy>
 			<catch-exception-strategy
 				when="#[exception.causedBy(java.io.IOException)]" doc:name="Catch Exception Strategy"
-				enableNotifications="false">
+				>
 				<logger
 					message="in IOException block  ::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::"
 					level="INFO" doc:name="Logs Exception cause" />
                 <flow-ref name="DBErrorHandlingFlow1" doc:name="moving file to err folder"/>
 			</catch-exception-strategy>
 			<catch-exception-strategy doc:name="Catch Exception Strategy"
-				enableNotifications="false">
+				>
 				<logger
 					message="in Default Exception block::::::::::::::::::#[exception.getCause().getMessage()]::::::::::::::::::::::::::"
 					level="INFO" doc:name="Logs Exception cause" />

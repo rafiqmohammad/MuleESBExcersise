@@ -10,38 +10,29 @@ This document illustrates the usecase built for exception handling for **DB Outb
 
 
 **Use-case**: 
-Build an example app which is able to handle DB-outbound SQL Exceptions 
-1) Response time out
-2) Unable to connect
+Build an example app which is 
+
+1) Get records from Database and put them in SFTP server.
+2) Should be able to handle DB-outbound SQL Exceptions **Response time out**
+3) Should be able to handle DB-outbound SQL Exceptions **Unable to connect**
+4) Should be to  IO Exception in case of SFTP is not up/running and save the contents via File Connector in error folder.
+5) In case of any exceptions then console them with following details using 'Exception Notifications Listener' 
+  Exception Notification with: Action name, Type, Class, Source.
+
 
 Running the application
 =======================
 
-1. Right click on example-on-mule-interceptor.mflow and select **Run As Mule Application**.
+1. Right click on DBErrorHandlingFlow.mflow and select **Run As Mule Application**.
 2. Check the console to see output when the application starts.
 
 	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	+ Started app 'example-on-mule-interceptor'		           +
+	+ Started app 'db-outbound-exception-handling'		       +
 	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-3. Hit the endpoint at<http://localhost:8081/muleInterceptor>.
-	Note: current payload to the flow would be '/muleInterceptor'
+3. Hit the endpoint at<http://localhost:8081/testErrorHandling>.
 	
-4. you would be seeing below logs at the console
 
-		:::in process: payload before intercept:::::::/muleInterceptor::::::::::
-		:::in process: payload after intercept:::::::/muleInterceptor!::::::::::
-		interceptorFlow, /muleInterceptor!
-
-5. Observe the current payload which is **/muleInterceptor!** 
-
-		**!** is added at end of the payload by the Class 'MyCustomInterceptor'
-
-6. You would also see the below log - due to timer-interceptor
-
-		interceptorFlow took 18ms to process event [0-287071b8-ba29-11e3-8eed-0d942f57ad4d]
-
-	
 Resources
 ===========
 
