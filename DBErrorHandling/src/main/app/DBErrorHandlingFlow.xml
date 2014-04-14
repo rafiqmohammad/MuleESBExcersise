@@ -22,7 +22,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 	<!--Global element Oracle_DatabaseConnector -->
 	<jdbc-ee:connector name="DatabaseConnector"
 		dataSource-ref="Oracle_Data_Source" validateConnections="true"
-		 pollingFrequency="0" doc:name="Database">
+		 pollingFrequency="0" doc:name="Database" queryTimeout="3">
 		<reconnect-forever frequency="15000" blocking="false" />
 	</jdbc-ee:connector>
 
@@ -60,6 +60,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 			<jdbc-ee:query key="callSumIT" value="call sumint" />
 		</jdbc-ee:outbound-endpoint>
         <logger message="Response from DB:#[payload]:" level="INFO" doc:name="Logs Response from DB"/>
+        <expression-filter expression="#[payload.getClass().toString() != 'class java.util.HashMap']" doc:name="Expression"/>
         <collection-splitter doc:name="Collection Splitter"/>
 		<object-to-string-transformer doc:name="Object to String" />
 		<logger message="Payload::::#[payload]:::" level="INFO"

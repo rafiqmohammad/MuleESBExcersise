@@ -27,10 +27,11 @@ Prerequisites
 In order to build and run this project you'll need:  
 
 * To download and install [MuleStudio Community edition](http://www.mulesoft.org/download-mule-esb-community-edition).
-* An Oracle Database with user id 'WSLDB'.
-* A Store Procedure 'SLEEP'
-* User EXECUTE Permissions on the dbms_lock module
-* A browser to make a request to your Mule application.
+* A browser to make a request to your Mule application. 
+* SFTP Server with a user id 'crushuser1' and up/running.
+* An Oracle Database with user id 'WSLDB' and up/running.
+* User EXECUTE Permissions on the dbms_lock module.
+* A Store Procedure 'SLEEP'.
 
 ### Oracle Store Procedure	to delay the response.
 
@@ -67,12 +68,14 @@ SQL> GRANT EXECUTE ON dbms_lock TO WSLDB; <br />
 
 ### Test for 'Response time out' Exception
 Change SQL Statement under JDBC Connector Query Key to 'callspSLEEP'.
-Note: in case of this exception you will not be able to push content
+Note: In this case one will not be able to push content save via SFTP/File connectors.
+
 ### Test for 'Unable to connect' Exception
-Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
+Pull down Oracle DB and hit a request via browser.
 
 ### Test for 'IO Exception' Exception
-Change SQL Statement under JDBC Connector Query Key to 'selectQ'.
+1. Pull down SFTP Server and hit a request via browser.
+2. Make usre DB is up and running.
 
 
 Running the application
@@ -85,11 +88,12 @@ Running the application
 	+ Started app 'db-outbound-exception-handling'		       +
 	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-3. Hit the endpoint at<http://localhost:8081/testErrorHandling>.
+3. Hit the endpoint at<http://localhost:8081/testErrorHandling?delay=5>.
 	
 	
 Resources
 ===========
 
 ● [Using Interceptors] (http://www.mulesoft.org/documentation/display/current/Using+Interceptors). <br />
-● [Oracle sproc for testing] (http://ourcraft.wordpress.com/2013/04/11/how-to-put-a-delay-in-an-oracle-sproc-for-testing/)
+● [Oracle sproc for testing] (http://ourcraft.wordpress.com/2013/04/11/how-to-put-a-delay-in-an-oracle-sproc-for-testing) <br />
+● [Crushftp Server] (http://www.crushftp.com/download.html)<br />
