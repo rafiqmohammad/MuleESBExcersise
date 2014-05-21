@@ -59,10 +59,11 @@ Profiling using JIP
 
 **Step 1:**
 
-1. Add java agent to VM
-● Right click on the java class.
-● Hover option ‘Run as'
-● Select ‘Run Configurations'
+1. Add java agent to VM <br />
+ 
+	● Right click on the java class.
+	● Hover option ‘Run as'
+	● Select ‘Run Configurations'
 
 2. Select 'Arguments' tab of the respective Junit class and add java agent.
 -javaagent:F:\JIP\jipProfiler\profile.jar -Dprofile.properties=F:\JIP\jipProfiler\profile.properties
