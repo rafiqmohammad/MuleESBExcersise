@@ -58,7 +58,8 @@ Profiling using JIP
 	● Hover option ‘Run as'.<br />
 	● Select ‘Run Configurations'. <br />
 
-2. Select 'Arguments' tab of the respective Junit class and add java agent.<br />
+2. Select 'Arguments' tab of the respective Junit class and add java agent. <br />
+
 	-javaagent:F:\JIP\jipProfiler\profile.jar -Dprofile.properties=F:\JIP\jipProfiler\profile.properties
 	
 3.	Hit Apply and Close button.<br />
@@ -70,7 +71,7 @@ Profiling using JIP
 	● Right click on the java class. <br />
 	● Hover option 'Run as'. <br />
 	● Select 'Junit Test'. <br />
-	● A report should be generated as per profiler.properties file. <br />
+	● A profile report should be generated as per profiler.properties file. <br />
 
 JIP report Viewer
 ==================
@@ -91,10 +92,10 @@ Under 'methods' tabs one can sort for the most expensive methods by a simple cli
 
 Resources
 ===========
-● [JIP]  (http://confluence.concord.org/display/CCTR/attachments/15911/1574.pdf) <br />
-● [Profile jar]  (http://sourceforge.net/projects/jiprof/) <br />
+● [What is JIP]  (http://confluence.concord.org/display/CCTR/attachments/15911/1574.pdf) <br />
+● [JIP Source]  (http://sourceforge.net/projects/jiprof/) <br />
 	
 	Note:
-		jar will be under directory named "profile".
+		profile.jar will be under directory named "profile".
 		Zip file also contains complete documentation on JIP under directory named "doc".
 ● [JIP Viewer jar] (http://trac.assembla.com/groudsim/export/193/trunk/GroudSim/profile/jipViewer.jar)<br />		
