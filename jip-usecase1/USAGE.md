@@ -1,8 +1,8 @@
 [Purpose](#purpose)  
-[Usecase](#usecase)
-[Prerequisites](#prerequisites)  
-[Profiling using JIP](#profiling-using-jip)  
-[Resources](#resources)
+[Usecase](#usecase)  
+[Prerequisites](#prerequisites)    
+[Profiling using JIP](#profiling-using-jip)    
+[Resources](#resources)  
 
 Purpose
 =======
@@ -13,21 +13,32 @@ Usecase
 ========
 
 ●     Trigger flow via HTTPinbound-endpoint with no.of rows to be inserted. 
+
 ●     Read json file which should be the payload. 
+
 ●     Pause for 10seconds.
+
 ●     Then insert records to DB by parsing JSON fields using MEL.
+
 ●     Pause for 10 seconds. 
+
 ●     Convert JSON to XML.
+
 ●     Pause for 30 seconds.
+
 ●     Log payload at end of flow.
+
 
 
 Prerequisites
 =============
 
 * To run the profiler, you need the following:
+
 ●     profile.jar
+
 ●     a profile properties file (optional)
+
 
 These files are loaded by the application classloader and should not be in the extensions loader path. The jar files need to be in the same directory. The properties file can be anywhere.
 To use the profiler, you need to use the following JVM arguments:
@@ -38,8 +49,11 @@ Note:where [DIR] must be a fully qualified path is the directory that contains t
 
 
 * To see the profiled report, you need the following:
+
 ●     jipViewer.jar
+
 ●     a profiled XML file
+
 
 
 Profiling using JIP
