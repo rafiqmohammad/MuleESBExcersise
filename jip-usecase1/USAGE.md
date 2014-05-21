@@ -61,34 +61,34 @@ Profiling using JIP
 
 1. Add java agent to VM <br />
  
-	● Right click on the java class.
-	● Hover option ‘Run as'
-	● Select ‘Run Configurations'
+	● Right click on the java class.<br />
+	● Hover option ‘Run as'.<br />
+	● Select ‘Run Configurations'. <br />
 
-2. Select 'Arguments' tab of the respective Junit class and add java agent.
--javaagent:F:\JIP\jipProfiler\profile.jar -Dprofile.properties=F:\JIP\jipProfiler\profile.properties
+2. Select 'Arguments' tab of the respective Junit class and add java agent.<br />
+	-javaagent:F:\JIP\jipProfiler\profile.jar -Dprofile.properties=F:\JIP\jipProfiler\profile.properties
 	
-3.	Hit Apply and Close button.
+3.	Hit Apply and Close button.<br />
 
 **Step 2:**
 
-● Right click on the java class.
-● Hover option 'Run as'.
-● Select 'Junit Test'.
-● A report should be generated as per profiler.properties file.
+● Right click on the java class.<br />
+● Hover option 'Run as'.<br />
+● Select 'Junit Test'.<br />
+● A report should be generated as per profiler.properties file.<br />
 
 JIP report Viewer
 ==================
 
-Step 1:
+**Step 1:**
 1. Place jipViewer.jar and generated profile report in place and execute below command, GUI will be prompted. 
 
-Example:
-	java -jar jipViewer.jar profiles\profile-JUNIT-U2-v1.xml
+	Example:
+		java -jar jipViewer.jar profiles\profile-JUNIT-U2-v1.xml
 
-Step 2: 
-Analyse the report as per the options available. 
-Under 'methods' tabs one can sort for the most expensive methods by a simple click on %net button.
+**Step 2: **
+	Analyse the report as per the options available. 
+	Under 'methods' tabs one can sort for the most expensive methods by a simple click on %net button.
 
 
 
