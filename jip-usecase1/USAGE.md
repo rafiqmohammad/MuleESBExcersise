@@ -72,21 +72,23 @@ Profiling using JIP
 
 **Step 2:**
 
-● Right click on the java class.<br />
-● Hover option 'Run as'.<br />
-● Select 'Junit Test'.<br />
-● A report should be generated as per profiler.properties file.<br />
+	● Right click on the java class.<br />
+	● Hover option 'Run as'.<br />
+	● Select 'Junit Test'.<br />
+	● A report should be generated as per profiler.properties file.<br />
 
 JIP report Viewer
 ==================
 
 **Step 1:**
+
 1. Place jipViewer.jar and generated profile report in place and execute below command, GUI will be prompted. 
 
 	Example:
 		java -jar jipViewer.jar profiles\profile-JUNIT-U2-v1.xml
 
 **Step 2: **
+
 	Analyse the report as per the options available. 
 	Under 'methods' tabs one can sort for the most expensive methods by a simple click on %net button.
 
@@ -95,5 +97,9 @@ JIP report Viewer
 Resources
 ===========
 		  
-● [Mule Aggregators](http://www.mulesoft.org/documentation/display/current/Routing+Message+Processors#RoutingMessageProcessors-RoutingMessageProcessors-All)	
-
+● [Mule Aggregators](http://www.mulesoft.org/documentation/display/current/Routing+Message+Processors#RoutingMessageProcessors-RoutingMessageProcessors-All)<br />
+● [JIP Viewer jar] (http://trac.assembla.com/groudsim/export/193/trunk/GroudSim/profile/jipViewer.jar)<br />
+● [Profile jar]  (http://sourceforge.net/projects/jiprof/) <br />
+	Note:
+		jar contains under **profile** directory.
+		Zip file also contains complete documentation on JIP under **doc** directory.
