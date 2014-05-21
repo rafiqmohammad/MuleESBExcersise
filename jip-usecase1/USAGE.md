@@ -43,36 +43,38 @@ These files are loaded by the application classloader and should not be in the e
 To use the profiler, you need to use the following JVM arguments:
 
 	-javaagent:[DIR]\profile.jar -Dprofile.properties=[DIR]\profile.properties
-	Note:where [DIR] must be a fully qualified path is the directory that contains the profile.jar 
+
+Note:where [DIR] must be a fully qualified path is the directory that contains the profile.jar 
 
 
-* To see the profiled report, you need the following:
+### To see the profiled report, you need the following:
 
-●     jipViewer.jar
-
-●     a profiled XML file
+	● jipViewer.jar
+	● a profiled XML file
 
 
 
 Profiling using JIP
 =======================
 
-Step 1:
+**Step 1:**
+
 1. Add java agent to VM
-●     Right click on the java class.
-●     Hover option ‘Run as'
-●     Select ‘Run Configurations'
+● Right click on the java class.
+● Hover option ‘Run as'
+● Select ‘Run Configurations'
 
 2. Select 'Arguments' tab of the respective Junit class and add java agent.
 -javaagent:F:\JIP\jipProfiler\profile.jar -Dprofile.properties=F:\JIP\jipProfiler\profile.properties
 	
 3.	Hit Apply and Close button.
 
-Step 2:
-●     Right click on the java class.
-●     Hover option 'Run as'.
-●     Select 'Junit Test'.
-●     A report should be generated as per profiler.properties file.
+**Step 2:**
+
+● Right click on the java class.
+● Hover option 'Run as'.
+● Select 'Junit Test'.
+● A report should be generated as per profiler.properties file.
 
 JIP report Viewer
 ==================
@@ -92,5 +94,5 @@ Under 'methods' tabs one can sort for the most expensive methods by a simple cli
 Resources
 ===========
 		  
-●     [Mule Aggregators](http://www.mulesoft.org/documentation/display/current/Routing+Message+Processors#RoutingMessageProcessors-RoutingMessageProcessors-All)	
+● [Mule Aggregators](http://www.mulesoft.org/documentation/display/current/Routing+Message+Processors#RoutingMessageProcessors-RoutingMessageProcessors-All)	
 
