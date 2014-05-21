@@ -35,9 +35,8 @@ Prerequisites
 
 ### To run the profiler, you need the following:
 
-● profile.jar.
-
-● a profile properties file (optional).
+	● profile.jar.
+	● a profile properties file (optional).
 
 
 These files are loaded by the application classloader and should not be in the extensions loader path. The jar files need to be in the same directory. The properties file can be anywhere.
