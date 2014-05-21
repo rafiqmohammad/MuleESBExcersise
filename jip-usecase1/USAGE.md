@@ -42,9 +42,8 @@ Prerequisites
 These files are loaded by the application classloader and should not be in the extensions loader path. The jar files need to be in the same directory. The properties file can be anywhere.
 To use the profiler, you need to use the following JVM arguments:
 
--javaagent:[DIR]\profile.jar -Dprofile.properties=[DIR]\profile.properties
-			
-Note:where [DIR] must be a fully qualified path is the directory that contains the profile.jar 
+	-javaagent:[DIR]\profile.jar -Dprofile.properties=[DIR]\profile.properties
+	Note:where [DIR] must be a fully qualified path is the directory that contains the profile.jar 
 
 
 * To see the profiled report, you need the following:
