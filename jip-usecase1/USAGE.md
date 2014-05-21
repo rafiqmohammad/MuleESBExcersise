@@ -12,21 +12,14 @@ This document illustrates how to profile mule application using JIP with sample 
 Usecase
 ========
 
-●     Trigger flow via HTTPinbound-endpoint with no.of rows to be inserted. 
-
-●     Read json file which should be the payload. 
-
-●     Pause for 10seconds.
-
-●     Then insert records to DB by parsing JSON fields using MEL.
-
-●     Pause for 10 seconds. 
-
-●     Convert JSON to XML.
-
-●     Pause for 30 seconds.
-
-●     Log payload at end of flow.
+●     Trigger flow via HTTPinbound-endpoint with no.of rows to be inserted. <br />
+●     Read json file which should be the payload. <br />
+●     Pause for 10seconds.<br />
+●     Then insert records to DB by parsing JSON fields using MEL.<br />
+●     Pause for 10 seconds.<br /> 
+●     Convert JSON to XML.<br />
+●     Pause for 30 seconds.<br />
+●     Log payload at end of flow.<br />
 
 
 
@@ -72,7 +65,7 @@ Profiling using JIP
 
 **Step 2:**
 
-	● Right click on the java class.<br />
+	● Right click on the java class.<br />
 	● Hover option 'Run as'.<br />
 	● Select 'Junit Test'.<br />
 	● A report should be generated as per profiler.properties file.<br />
@@ -85,21 +78,22 @@ JIP report Viewer
 1. Place jipViewer.jar and generated profile report in place and execute below command, GUI will be prompted. 
 
 	Example:
-		java -jar jipViewer.jar profiles\profile-JUNIT-U2-v1.xml
+		java -jar jipViewer.jar profiles\profile-JUNIT-U2-v1.xml.
 
-**Step 2: **
 
-	Analyse the report as per the options available. 
-	Under 'methods' tabs one can sort for the most expensive methods by a simple click on %net button.
+**Step 2:**<br />
+
+Analyse the report as per the options available. <br />
+Under 'methods' tabs one can sort for the most expensive methods by a simple click on %net button.<br />
 
 
 
 Resources
 ===========
-		  
-● [Mule Aggregators](http://www.mulesoft.org/documentation/display/current/Routing+Message+Processors#RoutingMessageProcessors-RoutingMessageProcessors-All)<br />
+
 ● [JIP Viewer jar] (http://trac.assembla.com/groudsim/export/193/trunk/GroudSim/profile/jipViewer.jar)<br />
 ● [Profile jar]  (http://sourceforge.net/projects/jiprof/) <br />
+	
 	Note:
-		jar contains under **profile** directory.
+		jar will be under **profile** directory.
 		Zip file also contains complete documentation on JIP under **doc** directory.
