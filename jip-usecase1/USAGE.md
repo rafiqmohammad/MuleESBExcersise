@@ -65,20 +65,21 @@ Profiling using JIP
 
 **Step 2:**
 
-	● Right click on the java class.<br />
-	● Hover option 'Run as'.<br />
-	● Select 'Junit Test'.<br />
-	● A report should be generated as per profiler.properties file.<br />
+1. Execute flow <br />
+ 
+	● Right click on the java class. <br />
+	● Hover option 'Run as'. <br />
+	● Select 'Junit Test'. <br />
+	● A report should be generated as per profiler.properties file. <br />
 
 JIP report Viewer
 ==================
 
 **Step 1:**
 
-1. Place jipViewer.jar and generated profile report in place and execute below command, GUI will be prompted. 
+1. Place jipViewer.jar and generated profile report in place and execute below command, GUI will be prompted. <br />
 
-	Example:
-		java -jar jipViewer.jar profiles\profile-JUNIT-U2-v1.xml.
+	java -jar jipViewer.jar profiles\profile-JUNIT-U2-v1.xml
 
 
 **Step 2:**<br />
@@ -90,10 +91,10 @@ Under 'methods' tabs one can sort for the most expensive methods by a simple cli
 
 Resources
 ===========
-
-● [JIP Viewer jar] (http://trac.assembla.com/groudsim/export/193/trunk/GroudSim/profile/jipViewer.jar)<br />
+● [JIP]  (http://confluence.concord.org/display/CCTR/attachments/15911/1574.pdf) <br />
 ● [Profile jar]  (http://sourceforge.net/projects/jiprof/) <br />
 	
 	Note:
-		jar will be under **profile** directory.
-		Zip file also contains complete documentation on JIP under **doc** directory.
+		jar will be under directory named "profile".
+		Zip file also contains complete documentation on JIP under directory named "doc".
+● [JIP Viewer jar] (http://trac.assembla.com/groudsim/export/193/trunk/GroudSim/profile/jipViewer.jar)<br />		
