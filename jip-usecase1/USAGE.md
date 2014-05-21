@@ -61,7 +61,7 @@ Profiling using JIP
 2. Select 'Arguments' tab of the respective Junit class and add java agent. <br />
 
 
-	-javaagent:F:\JIP\jipProfiler\profile.jar -Dprofile.properties=F:\JIP\jipProfiler\profile.properties 
+	-javaagent:F:\JIP\jipProfiler\profile.jar -Dprofile.properties=F:\JIP\jipProfiler\profile.properties
 	
 	
 3.	Hit Apply and Close button.<br />
@@ -85,7 +85,7 @@ JIP report Viewer
 	java -jar jipViewer.jar profiles\profile-JUNIT-U2-v1.xml
 	
 	
-**Step 2:**<br />
+**Step 2:** <br />
 
 Analyse the report as per the options available. <br />
 Under 'methods' tabs one can sort for the most expensive methods by a simple click on %net button.<br />
